@@ -1,0 +1,110 @@
+HDFS:
+
+HDFS File system metatdata  (It also callled HDFS Namespace): Owners of files, file permission, no of blocks, block location and size etc...
+
+Q) When fsimage and edits/editlog file will create?
+
+Q) What does it mean by entering NameNode into safe mode.
+
+Q) HDFS commands to check fsimage file location
+
+--> if you will turn the safemode ( command : hdfs dfsadmin -safemode enter) on and will use saveNamespace (command : hdfs dfsadmin -saveNamespace), it will show below mentioned log message.
+
+Q) Is in memory file system metadata read only or read-write mode during runtime?
+Q) Why Temporary editlog file is created during Checkpointing process in NameNode
+Q) Difference between SNN and Backup node w.r.t NameNode failure.
+Q) How to achieve HDFS High Availability w.r.t HDFS Federation
+Q) Difference between hadoop fs and hadoop dfs shell commands. (Here i can perform copyFromLocal as well as copyToLocal successfully using both commands)
+Q) Example using “hadoop [--config confdir] COMMAND”
+Q) Why directory size is 0 byte in HDFS?
+Q) Difference between hadoop fs -copyFromLocal and hadoop fs -put commands
+Q) “moveToLocal” fs command is not implemented in hadoop 1.2.1. More about this in current latest version of hadoop
+Q) Why do we create empty file of zero size with “touchz” command
+Q) Let me know the output of following scenarios and why?
+1. We have “dfs.replication” factor 1 at “hdfs-site.xml”
+2. NameNode has initiated
+3. Now we have change the replication factor as 3 for entire directory with command line i.e. setrep
+4. validated the replication factor chnage through web interface....its success
+5. now we restrted the NN and check the replication factor...but here its showing same as new factor
+setup i.e. 3. 
+
+Need clarification : When NN starts its configured as per hdfs-site.xml settings (if i am wrong correct me) and updated fsimage snapshot which is previous fsimage + edits log file before the NN stops (it is due to Checkpointing process). Here how NN works to get replication factor without contraducting wih hdfs-site.xml file.
+
+Q) Does zero size HDFS file map to block? Justify ur answer
+Q) Not able to get file – block mapping machine location using command “hadoop fsck <path> -openforwrite -filee -blocks -location” in psudomode cluster
+Q) command “oev” is not available in hadoop-1.2.1 version
+Q) More about starting NN,DN SNN individually using commands like hadoop namenode/datanode/secondarynamenode
+Q) About Delegation tockens
+Q) Where  and how do we configure the automatic stats about safemode entries.
+Q) Get some real time scenarios about NN safemode entries using “dfsadmin -safemode” command
+Q) Below are the scenarios where we can setup commissioning ror decommissioning...
+Each entry not defined in dfs.hosts but in  dfs.hosts.exclude is decommissioned. Each entry defined in dfs.hosts and also in dfs.host.exclude is stopped from decommissioning if it has aleady been marked for decommission.Entires not present in both the lists are decommissioned.
+Q) where do we configure the values to “hadoop.log.dir” property inorder to get NN's primary data structure using command “hadoop dfsadmin -metasave <filename>”
+
+
+. how fsimage and edit logs works in Hadoop
+http://www.bidwbooks.com/understanding-hdfs-architecture-part-2-2/
+
+
+Why a block size in HDFS is large?
+
+We all know that transferring a large file made of multiple blocks operates at the disk transfer rate i.e. let consider 100mbps. Also we know that average seek time of a Hard Disk is 10ms.
+Hence, Transfer time = Size of a block / Transfer rate.
+Let consider in HDFS a block size is 128 MB then transfer time = 128 / 100mbps i.e. 1.28 sec.
+Therefore total time taken to transfer 128 MB block = seek time + transfer time i.e. (10/1000) sec + 1.28 sec i.e. about 1.29 sec.
+
+Suppose if we make 10 blocks instead of 1 block then seek time for all 10 blocks = 10 * (10 / 1000) sec i.e. 0.1 sec. hence time taken to dump all blocks could be 1.39 secs. Apart from this we come across lot of other performance latency issues like…
+a.	If block size is less, its difficult to maintain seek time as 1% of total data transfer time. Hence block size should be large which means it takes more time to transfer all data then its easy to maintain seek time as 1% of total transfer time for continuous data stream access pattern.
+b.	If blocks are more with small size it restricts the NN namespace in memory space (i.e. each metadata line entry for each block file in namespace is about 150 bytes)
+c.	Also its difficult to maintain seek time consistency due to track seek, entire disc seek or cylinder rotation time for many small size block chunks.
+d.	 
+•	HDFS commands to get storage capacity of Data Node and how many blocks can be stored in disk
+•	HDFS commands to get file, blocks and their location
+•	How it’s possible to get over-replicated blocks for a HDFS file
+•	To get the information about the blocks being replicated or waiting to be replicated using hdfs dfsadmin -metasave 
+•	To get misreplicated blocks scenarios using command line hdfs fsck…we need to change the replication factor as well as have file size of more than 200 MB in single node cluster
+•	Can I say Corrupted blocks as Missing replicas  or what is exact diff between these two…
+•	Get the Datanode block scanner using DN Web interface i.e. http://localhost:50075/blockScannerReport along with listblocks parameter i.e. http://localhost:50075/blockScannerReport?listblocks
+
+Date: 3rd October 2015
+
+Q) About missing replicas...
+--> When number of DataNodes availability are less than replication factor number. 
+--> To get this info use "hadoop fsck / -files -blockes" command
+
+Q) Hadoop framework controlled by follwoing configuration files...
+-->   1) Read-only default configuration - src/core/core-default.xml, src/hdfs/hdfs-default.xml and src/mapred/mapred-default.xml.
+      2) Site-specific configuration - conf/core-site.xml, conf/hdfs-site.xml and conf/mapred-site.xml.
+Q) What is jps command and its usage.
+Q) A client	accesses the filesystem	on	behalf	of	the	user	by	communicating	with	the
+namenode	and	datanodes.	The	client	presents	a	filesystem	interface	similar	to	a	Portable
+Operating	System	Interface	(POSIX),	so	the	user	code	does	not	need	to	know	about	the
+namenode and	datanodes	to	function.
+
+Q) Differenece between ctime, mtime and actime
+http://www.linux-faqs.info/general/difference-between-mtime-ctime-and-atime
+Q) By default block is cached in only one datanode's  memory, altough the number is configurable on a per-file basis...is it like any one replication block witll get cached among specified 3 replication factor or something else?
+
+Date: 4th October 2015
+
+Q) How to get available memory in NameNode before loading the HDFS file/files into NameSpace of NN?
+
+Q) Is it possible to have each Namespace Volume (i.e. NameSpace + Block pool)  for different kind of DFS in Hadoop NN Federation.
+
+Q) What does mean by Hadoop Federation doesn't support overlapping mount points as of right now.
+
+Q) not able to find command “hadoop ConfigurationPrinter”  in hadoop 1.2.1 version
+Q) Under replicated blocks : if replication factor of a HDFS file is more than availble DataNodes then blocks which are being replicated are display under this category
+
+Q) how does HDFS client know about NN host machine...
+---> 1) Which webinterface
+       2) Command line : what is that command
+Q) In HDFS we can't execute files unlike POSIX where as we can execute directory under HDFS to access its childern.
+
+Q) What is the parameter name where we can set the HDFS security authentication permission under “hdfs-site.xml” file
+---> dfs.permissions.enabled        Value should be either true or false
+
+Q) Which is the interface class using to deal with HDFS FileSystem in Hadoop 
+---> i.e. org.apache.hadoop.fs.FileSystem abstract java class in Hadoop 1.0 and later in Hadoo 2.0 we are using “FileContext” inferface class to deal with more FileSystems in Hadoop including HDFS.
+
+Q)  Difference between -put / copyFromLocal and “distcp” command line
