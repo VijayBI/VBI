@@ -1,0 +1,73 @@
+bd83801f897f05a09e1c286e20d4c50da0890952 : blob type with content "test-content"
+
+58b92a63d06f0ed40e1560327239fb37f85e088a : blob type for File "test.txt" with content as "version 1" (version 1)
+
+0fb8ccbc5c57e6da553698af5040528313ed19e0 : blob type for File "test.txt" with content as "version 2"  (version 2)  (head)
+
+c1a9bf4c8ec3a6a454fd0a8bbd7dceea32b97368 : tree type with tree entry as 1st version of "test.txt" file i.e. 58b92a63d06f0ed40e1560327239fb37f85e088a
+
+fa49b077972391ad58037050f2a75f74e3671e92 : blob type for File "new.txt" with content as "new file"  (version 1) (head)
+
+742261b382bcd50a3ff7441ed5cba2a3d84b4006 : tree type with entry as 1st version of "new.txt" file i.e. fa49b077972391ad58037050f2a75f74e3671e9 and 2nd version of file "test.txt" i.e. 0fb8ccbc5c57e6da553698af5040528313ed19e0
+
+7f3722882a4f7066bcd4c974672b02dd208f2750 : tree type with another tree as a entry i.e. c1a9bf4c8ec3a6a454fd0a8bbd7dceea32b97368 by naming it "bak". Along with "new.txt" blob type and 2nd version of "test.txt" file as a blob type.
+
+
+a522a190d9bb536304123ca2c045fb546f18eeb0 : commit type for tree c1a9bf4c8ec3a6a454fd0a8bbd7dceea32b97368
+
+d67015d294939239b1e00f9620a078d736d4ee12 : commit type for tree 742261b382bcd50a3ff7441ed5cba2a3d84b4006
+
+13307ce1865475993662c02b8d6c607bb1ef5c6c : commit type for tree 7f3722882a4f7066bcd4c974672b02dd208f2750
+
+refs/heads/master			 : branch type for commit 13307ce1865475993662c02b8d6c607bb1ef5c6c
+
+refs/heads/test				 : branch type for commit d67015d294939239b1e00f9620a078d736d4ee12
+
+
+5c764907a05b2356189491118eb8b5f6c06abbd5 : blob type with content "9845114206"
+
+
+
+
+
+
+
+git clone ssh://vijaykumar.bi@cgit-pro.austin.hp.com:29418/gitrepo_austso
+
+
+curl https://raw.githubusercontent.com/mojombo/grit/master/lib/grit/repo.rb > repo
+
+git log --pretty=oneline master
+
+
+* To list all commits for specific file
+
+git log --follow filename or git log filename  e.g. git log --follow vbi.txt
+
+
+
+
+git clone ssh://vijaykumar.bi@cgit-pro.austin.hp.com:29418/gitrepo_austso
+
+
+git remote add origin git@github.com:schacon/simplegit-progit.git
+$ git push origin master
+
+
+$ cat .git/refs/remotes/origin/master
+
+
+Hansen, Linda <linda.hansen@hpe.com>
+
+
+* To grrove through latest commit object on specified branch...
+
+1) First let us know the current Commit Object i.e. SHA-1 checksum by "git log" (Out of displayed results first one is the latest one)
+2) Get the Commit Object elements/metadata by "git cat-file -p <SHA-1 Checksum value>  (Which list out the tree, parent commit/s, author and Committer)
+3) Then check each Tree objects entry of respective Commit Object by "git cat-file -p <SHA-1 checksum value of tree object>  (Which gives the content of that tree i.e. current repo status)
+
+
+
+
+
+
