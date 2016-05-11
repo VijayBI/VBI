@@ -1,0 +1,440 @@
+* To add our identity to git repository
+
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+
+Note: If you want to override this with a different name or e-mail address for
+specific projects, you can run the command without the --global option when
+you’re in that project. (it will get update into .git/config file)
+
+
+* To Setup the editor for git\
+
+git config --global core.editor emacs
+
+
+* Checking our settings
+
+$ git config --list
+
+Note: Git uses the last value for each unique key it sees.
+
+You can also check what Git thinks a specific key’s value is by typing git
+config <key>:
+
+$ git config user.name
+
+
+* Getting help
+
+$ git help <verb>
+$ git <verb> --help
+$ man git-<verb>
+
+e.g. git help config
+
+* Getting git repository
+
+a)  By importing git repo into existing project or directory
+
+git init
+
+Note: .git folder contains directories like hooks, info, refs, objects, logs and Files like config, description, config, HEAD and index....
+
+b)  By cloning an exhisting repository
+
+git clone <url of remote git repository>
+
+git clone <url of the remote gitrepo> <specified directory name>
+
+
+* To Check files are in which state (i.e. from working directory to staging area)
+
+git status
+
+* To add a new file with content
+
+echo 'text content' > <new filename>
+
+* To edit existing file by updating comments
+
+echo 'adding more text' >> <existing filename>
+
+* To Track a new file
+
+a)  git add <file name>
+
+* To Stage modified file/s
+
+a)  git add <file name>
+
+* To get short status
+
+git status -s or --short
+
+note: 
+?? = Not tracked or not staged
+A = New file has been added
+M(At left column) = Alreday tracked file is Modified and Staged 
+MM(With 'M' as right column) = Alreday tracked file is Modified and not staged.
+AM(with 'M' as right column) = Newly added file is modified but not staged.
+
+* To ignore files from tracking it i.e. not to stage for further commit actions
+
+a) By mentioning all file pattern listing in .gitignore file
+b) Also listing file patterns in .git >> info >> exclude file
+
+Note: Use all glob patterns to list file patterns
+
+* To see what you have changed but not yet staged
+
+git diff
+
+note: That command compares what is in your working directory with what is in
+your staging area. The result tells you the changes you’ve made that you haven’t
+yet staged.
+
+It’s important to note that git diff by itself doesn’t show all changes
+made since your last commit – only changes that are still unstaged. This can be
+confusing, because if you’ve staged all of your changes, git diff will give you
+no output.
+
+* To see what you have staged that will go into next commit
+
+git diff --staged
+
+note : This command compares your staged changes to your last commit: 
+
+
+* To see what you have staged so far
+
+git diff --cached
+
+* To commit the staged contents with commit msg inline with the commit command 
+
+git commit -m "add comment line here"
+
+* git command to commit tracked (but modifed) files by skipping staging area i.e. git add
+
+git commit -a -m "ur comment"
+
+Note: This one is only applicable to tracked file/s not for untracked files
+
+
+* To get the list of all commits done on given branch
+
+git log --pretty=oneline <branch name i.e. here it is master>
+
+* To get all logs i.e. commits done w.r.t specific file 
+
+git log --follow <file name> or git log <filename>
+
+
+* Removing files
+
+a) To remove file from staging area (i.e. Tracked file)
+
+git rm <file name> (this stages the this to next commit)
+
+b) To remove file/files simply from Working directory (i.e.not to be staged for next commit or unstaged)
+
+rm <file name>
+
+Note: after this u have to add this to staging area to commit it
+
+c) Removing the modified/changed file from tracked or staging area 
+
+git rm -f <file name>
+
+d) To remove file from staging area / stoping tracking it and keep it in working tree / local directory
+
+git rm --cached <file name>
+
+Note : You can pass files, directories, and file-glob patterns to the git rm command.
+
+* To rename a file in a Git
+
+git mv <file_from> <file_to>
+
+
+* Viewing the commit history
+
+a)  To get the existing commit history using basic command
+
+   i.e. git log 
+
+it lists the commit made in that repo in reverse chronological order.
+
+b) To get the difference introduced (i.e. Patch) in each commit by using "-p" option and limit the output to specified number of entries...
+
+i.e. git log -p -2
+
+note: This is very helpful for code review or to quickly browse what happened during a series of commits that a collaborator has added.
+
+c) To see some abbreviated stats foreach commit...use --stat option
+
+i.e. git log --stat
+
+d) To format the log output other than the default one...by using --pretty
+
+d.1)Using "oneline" option which prints commits in single line
+
+i.e. git log --pretty=oneline
+
+Note: same with oneline inbuilt options we can use short, full and fuller options.
+
+d.2) Using "format" option to specify our own log output format
+
+i.e. git log --pretty=format:"%h - %an,  %ar : %s"
+
+here h = Abbreviated commit hash, an = Author name, ar = author date, relative and s = Subject
+
+Note : This is especially useful when you’re generating output for machine parsing – because you specify the format explicitly, you know it won’t
+change with updates to Git:
+
+Other useful options for git log --pretty=format are
+
+%H = Commit hash
+%T = tree hash
+%t = Abbreviated tree hash
+%P =Parent hashes
+%p = abbreviated parent hash
+%ae = author email
+%ad = author date
+%cn = committer name
+%ce = commiter email
+%cd = commiter date
+%cr = Commiter date, relative
+
+
+d.3) to get log out put as a ASCII graph w.r.t branch and merge history by using --graph
+
+i.e. git log --pretty=format:"%h %s" --graph
+
+
+Note: common options to git log command
+
+-p, --stat, --shortstat, --name-only, --name-status, --abbrev-commit, --relative-date, --graph, --pretty
+
+
+* Options to Limit the output of git log
+
+1) git log -(n)	i.e. git log -2
+
+2) git log --since/--after
+3) git log --until/--before
+4) git log --author <author name>
+5) git log --committer <Committer name>
+6) git log --grep <string>
+7) git log -S  (Only show commits adding or removing code matching the string i.e. Another really helpful filter is the -S option which takes a string and only
+shows the commits that introduced a change to the code that added or removed that string.)
+
+8) The last really useful option to pass to git log as a filter is a path. If you
+specify a directory or file name, you can limit the log output to commits that
+introduced a change to those files. This is always the last option and is generally
+preceded by double dashes (--) to separate the paths from the options.
+
+* Undoing things
+
+git commit --amend -m 'commit msg'
+
+* Unstaging the staged file
+
+git reset HEAD <file>
+
+
+* Unmodifying the Modified file
+
+git checkout -- <file name in which u want to revert the changes>
+
+
+Note: 
+Remember, anything that is committed in Git can almost always be recovered. However, anything you lose that was never committed
+is likely never to be seen again.
+
+* Working with remotes
+
+a) Showing remotes
+
+git remote
+
+Note: If
+you’ve cloned your repository, you should at least see origin – that is the default name Git gives to the server you cloned from:
+
+b) To see the URLs that Git has stored for the shortname to be used when reading and writing to that remote:
+
+git remote -v
+
+c) Adding git remote explicitily as a shortname 
+
+git remote add [shortname] [url]
+
+d) Fetching and Pulling from ur remotes
+
+d.1) To get data from remote repo
+
+git fetch [remote-name]
+
+Note: 
+> After you do this, you should have references to all the branches from that remote, which you can merge in or inspect at any time.
+> git fetch origin (fetches any new work that has been pushed to that server since you cloned (or last fetched from) it.)
+> It’s important to note that the git fetch command pulls the data to your local repository – it doesn’t automatically merge it with any of your work
+  or modify what you’re currently working on. You have to merge it manually into your work when you’re ready.
+
+d.2) To track remote repo branch in local branch..
+
+git pull (to automatically fetch and then merge a remote branch into your current branch.)
+
+Note: 
+> by default, the git clone command automatically sets up your local master branch to
+  track the remote master branch (or whatever the default branch is called) on the server you cloned from.
+
+> Running git pull generally fetches data from the server you originally cloned from and automatically tries to merge it into the
+  code you’re currently working on.
+
+* Pushing to Your Remotes
+
+git push [remote-name] [branch-name]
+
+e.g. If you want to push your master branch to your origin server repo master branch
+
+git push origin master
+
+Note: This command works only if you cloned from a server to which you have write access and if nobody has pushed in the meantime. If you and someone
+else clone at the same time and they push upstream and then you push up-stream, your push will rightly be rejected. You’ll have to pull down their work
+first and incorporate it into yours before you’ll be allowed to push.
+
+* Inspecting a remote
+
+git remote show [remote-name]
+
+it lists following info...
+
+a) It lists the URL for the remote repository as well as the tracking branch information.
+b) This command shows which branch is automatically pushed to when you run git push while on certain branches.
+c) It also shows you which remote branches on the server you don’t yet have
+d) which remote branches you have that have been removed from the server.
+e) multiple branches that are automatically merged when you run git pull.
+
+* Removing and Renaming Remotes
+
+a) To rename repo
+
+git remote rename <old repo name> <new repo name>
+
+Note: it changes remote branche names too
+
+b) To remove repo
+
+git remote rm <repo name>
+
+* Tagging
+
+a) To list available tags
+
+git tag
+
+b) To search for tags with a particular pattern 
+
+git tag -l 'v.1.*'
+
+c) To create tags
+
+C.1) Annoated tags
+
+git tag -a <tag name> -m 'user comment msg'
+
+e.g. git tag -a v1.4.1 -m 'my version 1.4.1'
+
+c.1.1) to show the tag 
+
+git show v.1.4.1
+
+c.2) Lightweight Tags
+
+git tag v1.4-lw
+
+c.2.1) to show tag
+
+git show v1.4-lw
+
+d) Tagging Later
+
+git tag -a v1.2 <checksum of the commit>
+
+e) Sharing Tags
+
+Note: By default the 'gut push' command doesn't transfer tags to remote servers. You will have to explicitly push tags to a shared server after you have created them. it is just like a sharing remote branches.
+
+git push <remote repo name> [tag name]
+
+e.g. git push origin v1.5
+
+git push <remote repo name> --tags  (This will transfer all of your tags to the remote server that are not already there.)
+
+f) Checking out Tags
+
+You can’t really check out a tag in Git, since they can’t be moved around. If you want to put a version of your repository in your working directory that looks
+like a specific tag, you can create a new branch at a specific tag with... 
+
+git checkout -b [branchname] [tagname]
+
+e.g. git checkout -b version2 v2.0.0
+
+Note: version2 branch will be slightly different than your v2.0.0 tag since it will move forward with your new changes.
+
+
+* Git Aliases
+
+1) Git doesn’t automatically infer your command if you type it in partially. If you don’t want to type the entire text of each of the Git commands, you can easily set up an alias for each command using
+
+git config.
+
+e.g. git config --global alias.co checkout   (This means that, for example, instead of typing git commit, you just need to type git ci.)
+
+
+2) to correct the usability problem you encountered with unstaging a file, you can add your own unstage alias to Git:
+
+git config --global alias.unstage 'reset HEAD --'
+
+e.g. git unstage fileA
+
+3) It’s also common to add a last command, like this:
+
+
+git config --global alias.last 'log -1 HEAD'  (To see last commit)
+
+e.g. git last 
+
+
+4) However, maybe you want to run an external command, rather than a Git subcommand. In that case, you start the command with a ! character. This
+   is useful if you write your own tools that work with a Git repository. We can demonstrate by aliasing git visual to run gitk:
+
+git config --global alias.visual '!gitk'
+
+
+
+
+Chapter 3:	Git Branching
+
+
+08023469688
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
