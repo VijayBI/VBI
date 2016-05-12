@@ -1,0 +1,70 @@
+Date : APril 7, 2015
+
+cal
+passwd
+ls -l
+whoami
+users, who and w
+logout / exit
+clear
+halt / init 0 / init 6 / poweroff / reboot / shutdown
+
+File Managment
+--------------------------------
+
+ls and ls -l
+* and ? (meta characters) eg: ls access*.log -l
+
+ls -a (to get invisible files)
+
+Creating file: 
+i) vi filename
+ii) press i to edit mode
+iii) enter the text whatever u want
+iv) press "esc" to come out of edit mode
+v) then type "shift + ZZ"
+
+
+Editing file: 
+i) vi filename
+ii) press i to edit mode
+iii) edit the text whatever u want / or use l,h,k,j keies to edit file based on the position in a file for that u have to come out of edit mode and place the cursor using l,h,k,j kies and again press i to edit mode and edit the file
+iv) press "esc" to come out of edit mode
+v) then type "shift + ZZ"
+
+cat filename
+
+cat -b filename
+
+wc filename / wc filename1 filename2 filename3
+
+
+cp sourcefilename destinationfilename
+
+mv existingfilename newfilename
+
+rm filename or rm -i filename
+
+
+groups / id -Gn ---gives group id to which u belongs to.
+
+env, set or printenv ----To show / list all environment variables
+
+tar xvzf
+
+wget
+
+tput setf 4; echo hi
+
+$SHELL
+
+
+Setup environment variables(In Ubuntu 14.10)
+
+1) Navigate to etc directory i.e. computer>>etc (this is as root user level setup)
+2) open "profile" file
+3) at tail end define environment variable name with value like SCALABHA_DIR=/home/sparta/Scala/Scalabha_ToolKit/scalabha-0.1.1
+4) then export it i.e. export SCALABHA_DIR
+
+
+
