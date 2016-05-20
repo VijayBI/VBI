@@ -1,0 +1,13 @@
+{
+	"query":{
+		"match_all":{}
+	}
+}
+
+{
+	"query":{
+		"query_string":{
+			"query":"Apr"
+		}
+	}
+}
