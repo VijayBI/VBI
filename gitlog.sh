@@ -1,4 +1,4 @@
-git log --all --no-merges --shortstat --pretty=format:'commit_hash %H commit_hash_abbreviated %h tree_hash %T tree_hash_abbreviated %t parent_hashes %P parent_hashes_abbreviated %p author_email %ae author_date %ad author_date_unix_timestamp %at author_date_iso_8601 %ai committer_email %ce commit_subject %s' | awk -v q='"' -v c=':' -v cl='{' -v cr='}' -v bl='[' -v br=']' -v e=',' -v t='    ' '
+git log --all --no-merges --shortstat --pretty=format:'commit_hash %H commit_hash_abbreviated %h tree_hash %T tree_hash_abbreviated %t parent_hashes %P parent_hashes_abbreviated %p author_email %ae author_date %ad author_date_unix_timestamp %at author_date_iso_8601 %ai committer_email %ce commit_subject %s' | sed 's/" "/""/g' | awk -v q='"' -v c=':' -v cl='{' -v cr='}' -v bl='[' -v br=']' -v e=',' -v t='    ' '
 BEGIN {
 	print cl;
 	print t q "commits" q c bl;
@@ -28,9 +28,10 @@ BEGIN {
 		print t t t q "date_iso_8601" q c q $23 q e;
 		print t t t q "committer_email" q c q $27 q e;
 		print t t t q "files_changed" q c q $28 q e;
-		print t t t q "insertions" q c q $31 q e;
-		print t t t q "deletions" q c q $33 q e;
-		print t t t q "impact" q c q $31 - $33 q;
+		print t t t q "Commit_Subject" q c q $31 q e;
+		print t t t q "insertions" q c q $33 q e;
+		print t t t q "deletions" q c q $35 q e;
+		print t t t q "impact" q c q $33 - $35 q;
 	} else {
 		print t t t q "parent_hashes" q c q $10 q e;
 		print t t t q "parent_hashes_abbreviated" q c q $12 q e;
@@ -45,6 +46,7 @@ BEGIN {
 		print t t t q "date_iso_8601" q c q $25 q e;
 		print t t t q "committer_email" q c q $29 q e;
 		print t t t q "files_changed" q c q $30 q e;
+		print t t t q "Commit_Subject" q c q $31q e;
 		print t t t q "insertions" q c q $33 q e;
 		print t t t q "deletions" q c q $35 q e;
 		print t t t q "impact" q c q $33 - $35 q;
