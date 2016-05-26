@@ -1,0 +1,6 @@
+{"index":{"_index":"vbigit", "_type":"commits", "_id": "1"}}
+{"commit_nr":"1", "commit_hash":"e7e99906375792c9c25771548ff1dcf59147d43f", "tree_hash":"d61c11746771fa95849a29921300c1df46b6d240", "parent_hashes":"$6", "author_email":"bivij@BIVIJ3.asiapacific.hpqcorp.net", "date_day_week":"Fri", "Commit_Subject":"commitedd_again"}
+{"index":{"_index":"vbigit", "_type":"commits", "_id": "2"}}
+{"commit_nr":"2", "commit_hash":"9a1ca6461405e643bb94cdba2af27b09c5571881", "tree_hash":"fa6ad78f2f9d3e590a684c497c44ef3704fd0256", "parent_hashes":"$6", "author_email":"bivij@BIVIJ3.asiapacific.hpqcorp.net", "date_day_week":"Fri", "Commit_Subject":"addingJSONParsingFiles"}
+{"index":{"_index":"vbigit", "_type":"commits", "_id": "3"}}
+{"commit_nr":"6", "commit_hash":"a1118dc204c2daa6d51a2efbc1dc3a36d1848447", "tree_hash":"516630dc88045edcdfb928bd4fcc0c63b1994f33", "parent_hashes":"$6", "author_email":"bivij@BIVIJ3.asiapacific.hpqcorp.net", "date_day_week":"Thu", "Commit_Subject":"Dumping_n_number_of_files"}
