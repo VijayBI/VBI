@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<project>
+	<include buildfile="..\FedDB_Build_Script.properties"/>
+	<!--Methods used in Build: Start-->
+	<!--Methods used in Build: End-->
+</project>
